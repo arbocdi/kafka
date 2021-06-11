@@ -1,13 +1,17 @@
 ### Kafka
 
-* Kafka - is a message broker.
+* <span style="color:blue">Kafka</span> - is a message broker.
+* <span style="color:blue">Topic</span> - это именованный поток сообщений.
+* <span style="color:blue">Producer</span> посылает сообщение в один топик, <span style="color:blue">cоnsumer</span> потребляет из множества топиков.
+
+![producers-consumers.png](producers-consumers.png)
 
 ### Kafka Consumer Group and Offsets
 
-* <span style="color:blue">Topic</span> - это именованный поток сообщений.
-* Partition: каждый topic разбивается на партиции для репликации данных (отказоустойчивость) и повышение быстродействия.
-* <span style="color:blue">Partition</span>  - это упорядоченный набор сообщений, это часть топика. Sending a message to a topic appends it to the selected partition. 
-* <span style="color:blue">Offset</span> - это порядковый уникальный номер сообщения в партиции. Полный адрес сообщения можно записакть как: <span style="color:red"><topic, partition, offset></span>.
+* <span style="color:blue">Partition</span>  - это упорядоченный набор сообщений, это часть топика. 
+Каждый topic разбивается на партиции для репликации данных (replica) и повышение быстродействия (parallel consumers).
+Sending a message to a topic appends it to the selected partition. 
+* <span style="color:blue">Offset</span> - это порядковый уникальный номер сообщения в партиции. Полный адрес сообщения можно записакть как: <span style="color:red">{topic, partition, offset}</span>.
 * <span style="color:blue">Current Offset</span> - это номер последнего добавленного сообщения.
 * <span style="color:blue">Commited Offset</span> - это номер последнего успешно обработанного сообщения.
 * <span style="color:blue">Consumer offset commit</span> - когда потребитель обрабатывает сообщение он информирует кафку об offset 
@@ -15,16 +19,12 @@
 
 ![commit.png](commit.png)
 
-
-* <span style="color:blue">Consumer</span> - это потребитель сообщений. Kafka хранит offset в партиции для каждого потребителя.
-* <span style="color:blue">Consumer group</span> - это группа однотипных потребителей сообщений, обрабатывающих сообщения параллельно.
+* <span style="color:blue">Consumer group</span> - это группа однотипных потребителей сообщений, обрабатывающих сообщения параллельно.Kafka хранит offset в партиции для каждого потребителя.
 Consumer group получает сообщения из топика один раз, один потребитель может быть подписан на 1..* партиций, партиция посылает сообщения только одному потребителю из группы(!)
 => число партиций определяет степень параллелизма обработки сообщений:
 
 ![consumer-groups.png](consumer-groups.png)
-* Producer посылает сообщение в один топик, cjnsumer потребляет из множества топиков.
 
-![producers-consumers.png](producers-consumers.png)
 
 ### Replicas
 
