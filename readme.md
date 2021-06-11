@@ -64,22 +64,22 @@ sudo docker-compose up -d --restart always redis
 sudo docker exec -it kafka /opt/kafka/bin/kafka-console-producer.sh --broker-list localhost:19092 --topic tmc-topic
 ```
 * показать все топики:
-```
+```bash
 sudo docker exec -it kafka /opt/kafka/bin/kafka-topics.sh --list --bootstrap-server localhost:9092
 ```
 
 * consume messages qr-tablet-topic
-```
+```bash
 sudo docker exec -it kafka /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:19092 --topic fbucks-topic
 #on sandbox
 docker exec -it kafka bash -c "unset JMX_PORT && /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic department-topic"
 ```
 * consume messages from multiple topics (using regular expressions)
-```
+```bash
 sudo docker exec -it kafka /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --whitelist '.*'
 ```
 * kafka на sandbox.foodband.ru, контейнер с именем kafka, compose лежит в: /srv/fbadmin/kafka
 * создать топик:
-```
+```bash
 docker exec -it kafka /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:9092 --create --topic qr-tablet-topic --partitions 1 --replication-factor 1
 ```
