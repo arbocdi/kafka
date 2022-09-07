@@ -3,6 +3,7 @@
 * <span style="color:blue">Kafka</span> - is a message broker.
 * <span style="color:blue">Topic</span> - это именованный поток сообщений.
 * <span style="color:blue">Producer</span> посылает сообщение в один топик, <span style="color:blue">cоnsumer</span> потребляет из множества топиков.
+* Kafka гарантирует доставку сообщений  at least once => возможны дубликаты.
 
 ![producers-consumers.png](producers-consumers.png)
 
@@ -13,7 +14,7 @@
 Sending a message to a topic appends it to the selected partition. 
 * <span style="color:blue">Offset</span> - это порядковый уникальный номер сообщения в партиции. Полный адрес сообщения можно записакть как: <span style="color:red">{topic, partition, offset}</span>.
 * <span style="color:blue">Current Offset</span> - это номер последнего добавленного сообщения.
-* <span style="color:blue">Commited Offset</span> - это номер последнего успешно обработанного сообщения.
+* <span style="color:blue">Commited Offset</span> - это номер последнего успешно обработанного сообщения (хранится в кафка для определенного потребителя).
 * <span style="color:blue">Consumer offset commit</span> - когда потребитель обрабатывает сообщение он информирует кафку об offset 
 последнего обработанного сообщения, если потребитель остановится и вновь подключится, то он получит все сообщения начиная с последнего commited offset.
 
@@ -24,6 +25,7 @@ Consumer group получает сообщения из топика один р
 => число партиций определяет степень параллелизма обработки сообщений:
 
 ![consumer-groups.png](consumer-groups.png)
+![too much consumers](moreConsumersThenPartitions.png)
 
 
 ### Replicas
